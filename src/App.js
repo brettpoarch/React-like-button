@@ -1,21 +1,33 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
-}
+export default React.createClass({
+  getInitialState: function () {
+    return{
+      count: 0,
+      clss: 'button'
 
-export default App;
+    }
+  },
+
+  click: function() {
+      this.setState({
+        count: this.state.count + 1,
+        clss: 'clicked'
+    })
+    setTimeout(function(){
+      this.setState({
+      clss: 'button'
+    })
+    }.bind(this),150)
+
+  },
+
+  render: function() {
+    return ( 
+        <div>
+          <button className={this.state.clss} onClick={this.click}>{this.state.count} {this.state.count === 1 ? 'like' : 'likes'}</button>
+        </div>
+      )
+  }
+})
